@@ -1,4 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../../../../shared/shared.module';
 
 import { RoleComponent } from './role.component';
 
@@ -8,7 +11,12 @@ describe('RoleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RoleComponent ]
+      declarations: [ RoleComponent ],
+      imports: [ 
+        FormsModule, 
+        ReactiveFormsModule, 
+        SharedModule 
+      ],
     })
     .compileComponents();
   });
