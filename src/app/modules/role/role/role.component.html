@@ -1,1 +1,24 @@
-<p>role works!</p>
+<h2>Roles</h2>
+
+<div class="row">
+  <div class="col-12">
+    <table>
+      <thead>
+        <tr>
+          <th *ngFor="let title of headers" class="text-center">{{ title }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let role of roles">
+          <td>
+            {{ role.name }}
+          </td>
+          <td class="text-center">
+              <button>Editar</button>
+              <button>Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

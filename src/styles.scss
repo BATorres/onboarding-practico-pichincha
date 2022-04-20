@@ -1,1 +1,153 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Generales
+body {
+  background: #fff;
+  font-family: "Prelo Slab", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  padding-top: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  scroll-behavior: smooth;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+// Filas y columnas
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-1 {
+  flex: 0 0 auto;
+  width: 8.33333333%;
+}
+
+.col-2 {
+  flex: 0 0 auto;
+  width: 16.66666667%;
+}
+
+.col-3 {
+  flex: 0 0 auto;
+  width: 25%;
+}
+
+.col-4 {
+  flex: 0 0 auto;
+  width: 33.33333333%;
+}
+
+.col-5 {
+  flex: 0 0 auto;
+  width: 41.66666667%;
+}
+
+.col-6 {
+  flex: 0 0 auto;
+  width: 50%;
+}
+
+.col-7 {
+  flex: 0 0 auto;
+  width: 58.33333333%;
+}
+
+.col-8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  width: 83.33333333%;
+}
+
+.col-11 {
+  flex: 0 0 auto;
+  width: 91.66666667%;
+}
+
+.col-12 {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+// Padding
+.pt-1 {
+  padding-top: 0.25rem;
+}
+
+.pt-2 {
+  padding-top: 0.5rem;
+}
+
+.pt-3 {
+  padding-top: 1rem;
+}
+
+.pt-4 {
+  padding-top: 1.5rem;
+}
+
+.pt-5 {
+  padding-top: 3rem;
+}
+
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
+.pb-3 {
+  padding-bottom: 1rem;
+}
+
+.pb-4 {
+  padding-bottom: 1.5rem;
+}
+
+.pb-5 {
+  padding-bottom: 3rem;
+}
+
+// Tabla
+table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+
+td,
+th {
+  border: 1px solid #b4b4b4;
+  color: #0d0d0d;
+  position: relative;
+  text-align: left;
+  width: 33.33%;
+}
+
+td {
+  padding-left: 15px;
+}
+
+th {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+td > button {
+  margin-left: 5%;
+}
