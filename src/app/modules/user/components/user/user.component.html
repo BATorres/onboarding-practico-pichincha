@@ -1,6 +1,23 @@
 <h2>Usuarios</h2>
 
 <div class="row">
+  <div class="col-8">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Busque un usuario por su nombre"
+      [(ngModel)]="searchQuery"
+    />
+  </div>
+  <div class="col-3"></div>
+  <div class="col-1">
+    <button class="text-center" (click)="createUser()">
+      + Nuevo
+    </button>
+  </div>
+</div>
+
+<div class="row">
   <div class="col-12">
     <table>
       <thead>
@@ -21,4 +38,10 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div *ngIf="showModal">
+  <app-modal
+  (sendModalResponse)="listenModalButtons($event)"
+  ></app-modal>
 </div>

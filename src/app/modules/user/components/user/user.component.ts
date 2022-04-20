@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
+  searchQuery: any;
   headers: Array<string> = [ 'Nombre', 'Acciones' ];
   users: Array<any> = [
     {
@@ -14,11 +15,21 @@ export class UserComponent implements OnInit {
     {
       name: 'Usuario 2',
     }
-  ];;
+  ];
+  showModal = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  public createUser(): void {
+    this.showModal = true;
+  }
+
+  public listenModalButtons(event: any): void {
+    if (event === undefined) {
+      this.showModal = false;
+    }
+  }
 }
