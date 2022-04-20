@@ -1,4 +1,4 @@
-<h2>Usuarios</h2>
+<h2>Roles</h2>
 
 <div class="row">
   <div class="col-8">
@@ -11,7 +11,7 @@
   </div>
   <div class="col-3"></div>
   <div class="col-1">
-    <button class="btn btn-global text-center" (click)="createUser()">
+    <button class="btn btn-global text-center" (click)="createRole()">
       + Nuevo
     </button>
   </div>
@@ -26,24 +26,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users">
+        <tr *ngFor="let role of roles">
           <td>
-            {{ user.name }}
-          </td>
-          <td>
-            {{ user.email }}
-          </td>
-          <td>
-            {{ user.role }}
+            {{ role.name }}
           </td>
           <td class="text-center">
-            <button class="btn btn-global" (click)="editUser(user)">Editar</button>
-            <button class="btn btn-global" (click)="deleteUser(user?.id)">Eliminar</button>
+              <button class="btn btn-global" (click)="editRole(role)">Editar</button>
+              <button class="btn btn-global" (click)="deleteRole(role?.id)">Eliminar</button>
           </td>
         </tr>
-        
-        <tr *ngIf="users.length === 0">
-          <td colspan="4">No existen registros</td>
+
+        <tr *ngIf="roles.length === 0">
+          <td colspan="2">No existen registros</td>
         </tr>
       </tbody>
     </table>
@@ -52,8 +46,8 @@
 
 <div *ngIf="showModal">
   <app-modal
-  [module]="'usuario'"
-  [data]="user"
+  [module]="'rol'"
+  [data]="role"
   (sendModalResponse)="listenModalButtons($event)"
   ></app-modal>
 </div>

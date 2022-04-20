@@ -5,10 +5,10 @@
 
   <app-form [module]="module" [data]="data" (sendFormValues)="listenForm($event)"></app-form>
 
-  <div class="row">
+  <div class="row pb-3">
     <div class="col-12">
-        <button class="modal-buttons" (click)="cancel()">Cancelar</button>
-      <button class="modal-buttons" (click)="save()" [disabled]="disabled">Guardar</button>
+        <button class="btn btn-global modal-buttons" (click)="cancel()">Cancelar</button>
+      <button class="btn btn-global modal-buttons" (click)="save()" [disabled]="disabled">Guardar</button>
     </div>
   </div>
 </div>

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
   public searchQuery: any;
-  public headers: Array<string> = [ 'Nombre', 'Acciones' ];
+  public headers: Array<string> = [ 'Nombre', 'Correo', 'Rol', 'Acciones' ];
   public users: Array<any> = [
     {
       id: 1,
@@ -34,6 +34,7 @@ export class UserComponent implements OnInit {
   public listenModalButtons(event: any): void {
     if (event === undefined) {
       this.showModal = false;
+      this.user = undefined;
     } else {
       if (event?.id !== null) {
         const index = this.users.findIndex((user) => user.id === event.id);

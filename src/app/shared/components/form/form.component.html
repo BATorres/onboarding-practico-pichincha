@@ -1,7 +1,6 @@
 <form [formGroup]="form" novalidate autocomplete="off">
   <div class="row">
-    <div class="col-1"></div>
-    <div class="col-4">
+    <div class="col-5">
       <label>Nombre:</label>
       <input
         type="text"
@@ -22,9 +21,9 @@
       </div>
     </div>
 
-    <div class="col-2"></div>
+    <div class="col-1"></div>
 
-    <div *ngIf="module === 'usuario'" class="col-4">
+    <div *ngIf="module === 'usuario'" class="col-5">
       <label>Email: </label>
       <input
         type="text"
@@ -48,10 +47,10 @@
   </div>
 
   <div class="row pt-3 pb-5">
-    <div class="col-1"></div>
-    <div *ngIf="module === 'usuario'" class="col-4">
+    <div *ngIf="module === 'usuario'" class="col-5">
       <label>Rol:</label>
       <select
+      class="form-control"
         placeholder="Ingresa la url de la imagen"
         formControlName="role"
         [ngClass]="{ 'is-invalid': fc['role'].errors && fc['email'].touched }"
@@ -62,17 +61,11 @@
       </select>
 
       <div
-        *ngIf="fc['role'].errors && fc['email'].touched"
+        *ngIf="fc['role'].errors && fc['role'].touched"
         class="invalid-feedback"
       >
         <div *ngIf="fc['role'].errors['required']">El rol es obligatorio</div>
       </div>
     </div>
-
-    <div class="col-2"></div>
-
-    <!-- <div class="col-4 text-center">
-      <label>Defensa: </label>
-    </div> -->
   </div>
 </form>
