@@ -3,20 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { RoleRoutingModule } from './role-routing.module';
 import { RoleComponent } from './components/role/role.component';
-import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    RoleComponent
+    RoleComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     RoleRoutingModule,
-    ComponentsModule,
+    SharedModule,
   ]
 })
 export class RoleModule { }

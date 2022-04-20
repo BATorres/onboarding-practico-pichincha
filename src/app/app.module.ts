@@ -8,7 +8,7 @@ import { UserModule } from './modules/user/user.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
