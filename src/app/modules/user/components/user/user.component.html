@@ -31,8 +31,8 @@
             {{ user.name }}
           </td>
           <td class="text-center">
-            <button>Editar</button>
-            <button>Eliminar</button>
+            <button (click)="editUser(user)">Editar</button>
+            <button (click)="deleteUser(user?.id)">Eliminar</button>
           </td>
         </tr>
       </tbody>
@@ -42,6 +42,8 @@
 
 <div *ngIf="showModal">
   <app-modal
+  [module]="'usuario'"
+  [data]="user"
   (sendModalResponse)="listenModalButtons($event)"
   ></app-modal>
 </div>
