@@ -18,7 +18,7 @@
 </div>
 
 <div class="row pt-5 pb-5">
-  <div class="col-12">
+  <div class="col-12" style="overflow-x: auto;">
     <table>
       <thead>
         <tr>
@@ -26,7 +26,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let role of roles | searchRole: searchQuery">
+        <tr *ngFor="let role of roles | searchFilter: searchQuery">
           <td>
             {{ role.name }}
           </td>
@@ -42,14 +42,4 @@
       </tbody>
     </table>
   </div>
-</div>
-
-<div *ngIf="showModal">
-  <!-- <app-modal
-  [module]="'rol'"
-  [data]="role"
-  (sendModalResponse)="listenModalButtons($event)"
-  ></app-modal> -->
-
-  <app-role-form [data]="role" (sendFormValues)="listenModalButtons($event)"></app-role-form>
 </div>

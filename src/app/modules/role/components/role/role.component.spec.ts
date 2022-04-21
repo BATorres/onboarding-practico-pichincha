@@ -5,7 +5,6 @@ import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { of } from 'rxjs';
 import { SharedModule } from '../../../../shared/shared.module';
-import { SearchRolePipe } from '../../pipes/search-role.pipe';
 import { RoleService } from '../../services/role.service';
 
 import { RoleComponent } from './role.component';
@@ -17,7 +16,7 @@ describe('RoleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RoleComponent, SearchRolePipe ],
+      declarations: [ RoleComponent ],
       imports: [ 
         CommonModule,
         FormsModule, 

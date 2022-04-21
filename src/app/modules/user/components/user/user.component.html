@@ -18,7 +18,7 @@
 </div>
 
 <div class="row pt-5 pb-5">
-  <div class="col-12">
+  <div class="col-12" style="overflow-x: auto;">
     <table>
       <thead>
         <tr>
@@ -26,7 +26,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users | searchUser: searchQuery">
+        <tr *ngFor="let user of users | searchFilter: searchQuery">
           <td>
             {{ user.name }}
           </td>
@@ -48,14 +48,4 @@
       </tbody>
     </table>
   </div>
-</div>
-
-<div *ngIf="showModal">
-  <!-- <app-modal
-  [module]="'usuario'"
-  [data]="user"
-  (sendModalResponse)="listenModalButtons($event)"
-  ></app-modal> -->
-
-  <app-user-form [data]="user" (sendFormValues)="listenModalButtons($event)"></app-user-form>
 </div>

@@ -8,14 +8,12 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserService } from './services/user.service';
 import { RoleService } from '../role/services/role.service';
-import { SearchUserPipe } from './pipes/search-user.pipe';
 
 
 @NgModule({
   declarations: [
     UserComponent,
     UserFormComponent,
-    SearchUserPipe,
   ],
   imports: [
     CommonModule,

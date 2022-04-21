@@ -5,7 +5,6 @@ import { By } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { of } from 'rxjs';
 import { SharedModule } from '../../../../shared/shared.module';
-import { SearchUserPipe } from '../../pipes/search-user.pipe';
 import { UserService } from '../../services/user.service';
 
 import { UserComponent } from './user.component';
@@ -17,7 +16,7 @@ describe('UserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserComponent, SearchUserPipe ],
+      declarations: [ UserComponent ],
       imports: [ 
         CommonModule,
         FormsModule,
