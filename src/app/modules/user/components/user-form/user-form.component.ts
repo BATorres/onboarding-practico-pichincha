@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime } from 'rxjs';
+import { RoleService } from 'src/app/modules/role/services/role.service';
 
 @Component({
   selector: 'app-user-form',
@@ -13,13 +14,16 @@ export class UserFormComponent implements OnInit {
   
   public form: FormGroup;
   public disabled: boolean = true;
+  public roles: Array<any> = [];
 
   constructor(
     private _formBuilder: FormBuilder,
+    private _roleService: RoleService,
   ) { }
 
   ngOnInit(): void {
     this.setForm();
+    this.getRoles();
 
     if (this.data !== undefined) {
       this.form.setValue({ ...this.data });
@@ -45,6 +49,10 @@ export class UserFormComponent implements OnInit {
         email: [null, Validators.compose([Validators.required, Validators.email])],
         role: [null, Validators.required],
       });
+  }
+
+  public getRoles(): void {
+    this._roleService.getAll().subscribe((data) => this.roles = data);
   }
 
   get fc() {

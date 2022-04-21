@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserService } from './services/user.service';
+import { RoleService } from '../role/services/role.service';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { UserService } from './services/user.service';
     SharedModule,
   ],
   providers: [
+    RoleService,
     UserService,
   ]
 })

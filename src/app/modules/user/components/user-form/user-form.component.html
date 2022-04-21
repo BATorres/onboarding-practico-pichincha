@@ -76,9 +76,10 @@
             }"
           >
             <option value="" disabled selected hidden>Escoja un rol</option>
-            <option value="Administrador">Administrador</option>
+            <option *ngFor="let role of roles" [value]="role.name">{{ role.name }}</option>
+            <!-- <option value="Administrador">Administrador</option>
             <option value="Gerente">Gerente</option>
-            <option value="Lider célula">Lider célula</option>
+            <option value="Lider célula">Lider célula</option> -->
           </select>
 
           <div
