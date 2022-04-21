@@ -11,9 +11,9 @@
   </div>
   <div class="col-3"></div>
   <div class="col-1">
-    <button class="btn btn-global text-center" (click)="createUser()">
+    <a routerLink="/usuario/nuevo" class="btn btn-global text-center">
       + Nuevo
-    </button>
+    </a>
   </div>
 </div>
 
@@ -37,7 +37,7 @@
             {{ user.role }}
           </td>
           <td class="text-center">
-            <button class="btn btn-global" (click)="editUser(user)">Editar</button>
+            <a class="btn btn-global" [routerLink]="['/usuario/editar', user?.id]">Editar</a>
             <button class="btn btn-global" (click)="deleteUser(user?.id)">Eliminar</button>
           </td>
         </tr>

@@ -26,6 +26,14 @@ export class RoleService {
     return of(this.roles);
   }
 
+  public getRole(roleId: number): Observable<any> {
+    const roleIndex: number = this.roles.findIndex((user) => {
+      return user?.id === +roleId;
+    });
+
+    return of(this.roles[roleIndex]);
+  }
+
   public saveRole(data: any): Observable<any> {
     const lastRole = this.roles[this.roles.length - 1];
     data.id = lastRole?.id ? lastRole?.id + 1 : 1 ;

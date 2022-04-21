@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { debounceTime } from 'rxjs';
+import { RoleService } from '../../services/role.service';
 
 @Component({
   selector: 'app-role-form',
@@ -13,17 +15,22 @@ export class RoleFormComponent implements OnInit {
   
   public form: FormGroup;
   public disabled: boolean = true;
+  public id;
+  public title: string;
 
   constructor(
     private _formBuilder: FormBuilder,
+    private _roleService: RoleService,
+    private _activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     this.setForm();
+    this.getData();
 
-    if (this.data !== undefined) {
+    /* if (this.data !== undefined) {
       this.form.setValue({ ...this.data });
-    }
+    } */
 
     this.form.valueChanges.pipe(debounceTime(1000)).subscribe(
       (fields) => {
@@ -45,6 +52,18 @@ export class RoleFormComponent implements OnInit {
       });
   }
 
+  public getData(): void {
+    this.id = this._activatedRoute.snapshot.params['id'];
+    if (this.id !== undefined) {
+      this.title = 'Editar rol';
+      this._roleService
+        .getRole(this.id)
+        .subscribe((data) => this.form.setValue({ ...data }));
+    } else {
+      this.title = 'Crear rol'
+    }
+  }
+
   get fc() {
     return this.form.controls;
   }
@@ -55,5 +74,15 @@ export class RoleFormComponent implements OnInit {
 
   public cancel(): void {
     this.sendFormValues.emit(undefined);
+  }
+
+  public submit(): void {
+    if (this.id !== undefined) {
+      this._roleService.updateRole(this.form.value);
+    } else {
+      this._roleService.saveRole(this.form.value);
+      this.form.reset();
+      this.setForm();
+    }
   }
 }

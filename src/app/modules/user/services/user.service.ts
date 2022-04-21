@@ -26,6 +26,14 @@ export class UserService {
     return of(this.users);
   }
 
+  public getUser(userId: number): Observable<any> {
+    const userIndex: number = this.users.findIndex((user) => {
+      return user?.id === +userId;
+    });
+
+    return of(this.users[userIndex]);
+  }
+
   public saveUser(data: any): Observable<any> {
     const lastUser = this.users[this.users.length - 1];
     data.id = lastUser?.id ? lastUser?.id + 1 : 1 ;
