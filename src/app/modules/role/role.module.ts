@@ -6,6 +6,7 @@ import { RoleComponent } from './components/role/role.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RoleFormComponent } from './components/role-form/role-form.component';
+import { RoleService } from './services/role.service';
 
 
 @NgModule({
@@ -19,6 +20,9 @@ import { RoleFormComponent } from './components/role-form/role-form.component';
     ReactiveFormsModule,
     RoleRoutingModule,
     SharedModule,
+  ],
+  providers: [
+    RoleService,
   ]
 })
 export class RoleModule { }

@@ -1,34 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
   public searchQuery: any;
-  public headers: Array<string> = [ 'Nombre', 'Correo', 'Rol', 'Acciones' ];
-  public users: Array<any> = [
-    {
-      id: 1,
-      name: 'Usuario 1',
-      email: 'usuario1@gmail.com',
-      role: 'Administrador',
-    },
-    {
-      id: 2,
-      name: 'Usuario 2',
-      email: 'usuario2@gmail.com',
-      role: 'Administrador',
-    }
-  ];
+  public headers: Array<string> = ['Nombre', 'Correo', 'Rol', 'Acciones'];
+  public users: Array<any> = [];
   public user: any = undefined;
   public showModal = false;
-  public incrementalId: number = this.users.length;
 
-  constructor() { }
+  constructor(private _userService: UserService) {}
 
   ngOnInit(): void {
+    this._userService.getAll().subscribe((data) => (this.users = data));
   }
 
   public listenModalButtons(event: any): void {
@@ -37,14 +25,16 @@ export class UserComponent implements OnInit {
       this.user = undefined;
     } else {
       if (event?.id !== null) {
-        const index = this.users.findIndex((user) => user.id === event.id);
-        this.users[index] = event;
+        this._userService
+          .updateUser(event)
+          .subscribe((data) => (this.users = data));
       } else {
-        this.incrementalId += 1;
-        const newUser = {id: this.incrementalId, name: event.name, email: event.email, role: event.role};
-        this.users.push(newUser);
+        this._userService
+          .saveUser(event)
+          .subscribe((data) => (this.users = data));
       }
       this.showModal = false;
+      this.user = false;
     }
   }
 
@@ -58,10 +48,8 @@ export class UserComponent implements OnInit {
   }
 
   public deleteUser(userId: any): void {
-    const index = this.users.findIndex((user) => user.id === userId);
-
-    if (index !== -1) {
-      this.users.splice(index, 1);
-    }
+    this._userService
+      .deleteUser(userId)
+      .subscribe((data) => (this.users = data));
   }
 }
