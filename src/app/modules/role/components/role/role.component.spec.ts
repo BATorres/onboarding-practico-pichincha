@@ -1,7 +1,9 @@
-import { CommonModule } from '@angular/common';
+import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../../../shared/shared.module';
+import { SearchRolePipe } from '../../pipes/search-role.pipe';
 
 import { RoleComponent } from './role.component';
 
@@ -11,12 +13,15 @@ describe('RoleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RoleComponent ],
+      declarations: [ RoleComponent, SearchRolePipe ],
       imports: [ 
+        CommonModule,
         FormsModule, 
         ReactiveFormsModule, 
-        SharedModule 
+        SharedModule,
+        RouterModule.forRoot([]),
       ],
+      providers: [{provide: APP_BASE_HREF, useValue: '/'}]
     })
     .compileComponents();
   });

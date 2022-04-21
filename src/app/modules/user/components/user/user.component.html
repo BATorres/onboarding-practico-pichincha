@@ -26,7 +26,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users | searchFilter: searchQuery">
+        <tr *ngFor="let user of users | searchUser: searchQuery">
           <td>
             {{ user.name }}
           </td>

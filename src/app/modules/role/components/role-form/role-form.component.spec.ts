@@ -1,4 +1,7 @@
+import { APP_BASE_HREF } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 
 import { RoleFormComponent } from './role-form.component';
 
@@ -8,7 +11,9 @@ describe('RoleFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RoleFormComponent ]
+      declarations: [ RoleFormComponent ],
+      imports: [ FormsModule, ReactiveFormsModule, RouterModule.forRoot([]) ],
+      providers: [{provide: APP_BASE_HREF, useValue: '/'}]
     })
     .compileComponents();
   });

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime } from 'rxjs';
-import { RoleService } from 'src/app/modules/role/services/role.service';
+import { RoleService } from '../../../../modules/role/services/role.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
