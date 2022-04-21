@@ -1,16 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RoleComponent } from './modules/role/components/role/role.component';
-import { UserComponent } from './modules/user/components/user/user.component';
 
 const routes: Routes = [
   {
     path: 'rol',
-    component: RoleComponent,
+    loadChildren: () => import('./modules/role/role.module').then((m) => m.RoleModule),
   },
   {
     path: 'usuario',
-    component: UserComponent,
+    loadChildren: () => import('./modules/user/user.module').then((m) => m.UserModule),
   },
   {
     path: '',
