@@ -51,9 +51,11 @@
 </div>
 
 <div *ngIf="showModal">
-  <app-modal
+  <!-- <app-modal
   [module]="'usuario'"
   [data]="user"
   (sendModalResponse)="listenModalButtons($event)"
-  ></app-modal>
+  ></app-modal> -->
+
+  <app-user-form [data]="user" (sendFormValues)="listenModalButtons($event)"></app-user-form>
 </div>

@@ -1,0 +1,111 @@
+<div class="modal-overlay" id="modal-overlay"></div>
+
+<div class="modal">
+  <div class="row">
+    <div class="col-10">
+      <h3>{{ data !== undefined ? "Editar" : "Crear" }} usuario</h3>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-ligth" style="float: right" (click)="cancel()">
+        X
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <form [formGroup]="form" novalidate autocomplete="off">
+        <div class="row">
+          <div class="col-11">
+            <label>Nombre:</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ingresa el nombre"
+              formControlName="name"
+              [ngClass]="{
+                'is-invalid':
+                  form.invalid && fc['name'].errors && fc['name'].touched
+              }"
+            />
+            <div
+              *ngIf="form.invalid && fc['name'].errors && fc['name'].touched"
+              class="invalid-feedback"
+            >
+              <div *ngIf="fc['name'].errors['required']">
+                El nombre es obligatorio
+              </div>
+            </div>
+          </div>
+
+          <div class="col-11 pt-3">
+            <label>Email: </label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Ingresa el email"
+              formControlName="email"
+              [ngClass]="{
+                'is-invalid':
+                  form.invalid && fc['email'].errors && fc['email'].touched
+              }"
+            />
+            <div
+              *ngIf="form.invalid && fc['email'].errors && fc['email'].touched"
+              class="invalid-feedback"
+            >
+              <div *ngIf="fc['email'].errors['required']">
+                El email es obligatorio
+              </div>
+
+              <div *ngIf="fc['email'].errors['email']">
+                El email ingresado no es válido
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 pt-3">
+          <label>Rol:</label>
+          <select
+            class="form-control minimal"
+            name="roles"
+            formControlName="role"
+            [ngClass]="{
+              'is-invalid': fc['role'].errors && fc['email'].touched
+            }"
+          >
+            <option value="" disabled selected hidden>Escoja un rol</option>
+            <option value="Administrador">Administrador</option>
+            <option value="Gerente">Gerente</option>
+            <option value="Lider célula">Lider célula</option>
+          </select>
+
+          <div
+            *ngIf="fc['role'].errors && fc['role'].touched"
+            class="invalid-feedback"
+          >
+            <div *ngIf="fc['role'].errors['required']">
+              El rol es obligatorio
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row pt-3 pb-3">
+    <div class="col-12">
+      <button class="btn btn-global modal-buttons" (click)="cancel()">
+        Cancelar
+      </button>
+      <button
+        class="btn btn-global modal-buttons"
+        (click)="save()"
+        [disabled]="disabled"
+      >
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>

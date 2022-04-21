@@ -13,8 +13,8 @@ const routes: Routes = [
     component: UserComponent,
   },
   {
-    path: '**',
-    redirectTo: '/',
+    path: '',
+    redirectTo: 'usuario',
     pathMatch: 'full',
   },
 ];

@@ -5,11 +5,13 @@ import { RoleRoutingModule } from './role-routing.module';
 import { RoleComponent } from './components/role/role.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { RoleFormComponent } from './components/role-form/role-form.component';
 
 
 @NgModule({
   declarations: [
     RoleComponent,
+    RoleFormComponent,
   ],
   imports: [
     CommonModule,
