@@ -1,6 +1,6 @@
 <!-- <div class="modal-overlay" id="modal-overlay"></div> -->
 
-<div>
+<div class="form">
   <div class="row">
     <div class="col-10">
       <h3>{{ title }}</h3>
@@ -14,7 +14,7 @@
     <div class="col-12">
       <form [formGroup]="form" novalidate autocomplete="off">
         <div class="row">
-          <div class="col-6">
+          <div class="col-11">
             <label>Nombre:</label>
             <input
               type="text"
@@ -42,18 +42,18 @@
 
   <div class="row pt-3 pb-3">
     <div class="col-12">
+      <a class="btn btn-global modal-buttons" href="rol" >
+        Cancelar
+      </a>
+
       <button
-        class="btn btn-global"
+        class="btn btn-global modal-buttons"
         (click)="submit()"
         [disabled]="disabled"
         style="margin-right: 3%;"
       >
         Guardar
       </button>
-
-      <a class="btn btn-global" href="rol" >
-        Cancelar
-      </a>
     </div>
   </div>
 </div>

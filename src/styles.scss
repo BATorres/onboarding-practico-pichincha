@@ -130,6 +130,19 @@ td > button {
 }
 
 // Formulario
+.form {
+  background: white;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 0.25rem;
+  top: 50%;
+  left: 50%;
+  padding: 25px;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+}
+
 .form-control {
   display: block;
   width: 100%;
@@ -197,20 +210,6 @@ td > button {
 }
 
 // Modal
-.modal {
-  background: white;
-  background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  border-radius: 0.25rem;
-  top: 50%;
-  left: 50%;
-  padding: 25px;
-  position: fixed;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  z-index: 100;
-}
-
 .modal-overlay {
   background: rgba(0, 0, 0, 0.6);
   position: fixed;
@@ -224,4 +223,11 @@ td > button {
 .modal-buttons {
   float: right;
   margin-left: 3%;
+}
+
+@media screen and (max-with: 488px) {
+  .modal-buttons::before {
+    flex: 0 0 auto;
+    width: 100%;
+  }
 }
