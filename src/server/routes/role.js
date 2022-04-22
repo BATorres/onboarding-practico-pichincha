@@ -53,9 +53,8 @@ router.get('/:roleId', function (req, res) {
       message: "Rol encontrado correctamente",
       data: roles[roleIndex],
     };
-
-    res.send(response);
   }
+  res.send(response);
 });
 
 router.post("/store", function (req, res) {
@@ -78,9 +77,8 @@ router.post("/store", function (req, res) {
       message: "Rol creado correctamente",
       data: roles,
     };
-
-    res.send(response);
   }
+  res.send(response);
 });
 
 router.put('/update', function (req, res) {
@@ -103,9 +101,8 @@ router.put('/update', function (req, res) {
       message: "Rol editado correctamente",
       data: req.body,
     };
-
-    res.send(response);
   }
+  res.send(response);
  });
 
  router.delete('/delete/:roleId', function (req, res) {
@@ -126,9 +123,8 @@ router.put('/update', function (req, res) {
       message: "Rol eliminado correctamente",
       data: roles,
     };
-
-    res.send(response);
   }
+  res.send(response);
  });
 
 module.exports = router;

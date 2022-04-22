@@ -61,8 +61,11 @@ export class RoleFormComponent implements OnInit {
         .getRole(this.id)
         .subscribe(
           (role) => {
-            console.log('quejesto?', role)
-            this.form.setValue({ ...role.data })
+            if (!role.error) {
+              this.form.setValue({ ...role.data });
+            } else {
+              this._router.navigate(['/rol']);
+            }
           },
           (error) => console.log('error', error)
         );

@@ -65,7 +65,13 @@ export class UserFormComponent implements OnInit {
     if (this.id !== undefined) {
       this.title = 'Editar usuario';
       this._userService.getUser(this.id).subscribe(
-        (user) => this.form.setValue({ ...user.data }),
+        (user) => {
+          if (!user.error) {
+            this.form.setValue({ ...user.data })
+          } else {
+            this._router.navigate(['/usuario']);
+          }
+        },
         (error) => console.error('error', error)
       );
     } else {

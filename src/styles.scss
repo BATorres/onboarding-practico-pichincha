@@ -1,16 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
 // Generales
+* {
+  margin: 0;
+ }
+
 body {
   background: #fff;
   font-family: "Prelo Slab", sans-serif;
   font-weight: 400;
   font-size: 14px;
+}
+
+.container {
   padding-top: 20px;
   padding-left: 50px;
   padding-right: 50px;
-  scroll-behavior: smooth;
 }
+
+a {
+  text-decoration: none;
+ }
+ li {
+  list-style: none;
+ }
 
 .text-center {
   text-align: center !important;
@@ -223,11 +236,4 @@ td > button {
 .modal-buttons {
   float: right;
   margin-left: 3%;
-}
-
-@media screen and (max-with: 488px) {
-  .modal-buttons::before {
-    flex: 0 0 auto;
-    width: 100%;
-  }
 }
