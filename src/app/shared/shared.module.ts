@@ -12,6 +12,6 @@ import { ComponentsModule } from './components/components.module';
   exports: [
     SearchFilterPipe,
     ComponentsModule,
-  ]
+  ],
 })
 export class SharedModule { }

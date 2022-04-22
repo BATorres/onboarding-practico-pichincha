@@ -43,6 +43,7 @@ router.get('/:userId', function (req, res) {
       code: 502,
       message: "No existe el usuario",
     };
+    res.status(502).send(response);
   } else {
     response = {
       error: false,
@@ -50,8 +51,8 @@ router.get('/:userId', function (req, res) {
       message: "Usuario encontrado correctamente",
       data: users[userIndex],
     };
+    res.send(response);
   }
-  res.send(response);
 });
 
 router.post("/store", function (req, res) {
@@ -61,6 +62,7 @@ router.post("/store", function (req, res) {
       code: 502,
       message: "Los campos nombre, correo y rol son requeridos",
     };
+    res.status(502).send(response);
   } else {
     const lastUser = users[users.length - 1];
     req.body.id = lastUser?.id ? lastUser?.id + 1 : 1;
@@ -73,8 +75,8 @@ router.post("/store", function (req, res) {
       message: "Usuario creado correctamente",
       data: users,
     };
+    res.send(response);
   }
-  res.send(response);
 });
 
 router.put('/update', function (req, res) {
@@ -88,6 +90,7 @@ router.put('/update', function (req, res) {
       code: 502,
       message: "No existe el usuario",
     };
+    res.status(502).send(response);
   } else {
     users[userIndex] = req.body;
 
@@ -97,8 +100,8 @@ router.put('/update', function (req, res) {
       message: "Usuario editado correctamente",
       data: req.body,
     };
+    res.send(response);
   }
-  res.send(response);
  });
 
  router.delete('/delete/:userId', function (req, res) {
@@ -110,6 +113,7 @@ router.put('/update', function (req, res) {
       code: 502,
       message: "No existe el usuario",
     };
+    res.status(502).send(response);
   } else {
     users.splice(index, 1);
 
@@ -119,8 +123,8 @@ router.put('/update', function (req, res) {
       message: "Usuario eliminado correctamente",
       data: users,
     };
+    res.send(response);
   }
-  res.send(response);
  });
 
 module.exports = router;

@@ -46,6 +46,7 @@ router.get('/:roleId', function (req, res) {
       code: 502,
       message: "No existe el rol",
     };
+    res.status(502).send(response);
   } else {
     response = {
       error: false,
@@ -53,8 +54,8 @@ router.get('/:roleId', function (req, res) {
       message: "Rol encontrado correctamente",
       data: roles[roleIndex],
     };
+    res.send(response);
   }
-  res.send(response);
 });
 
 router.post("/store", function (req, res) {
@@ -64,6 +65,7 @@ router.post("/store", function (req, res) {
       code: 502,
       message: "El campo nombre es requerido",
     };
+    res.status(502).send(response);
   } else {
     const lastRole = roles[roles.length - 1];
     req.body.id = lastRole?.id ? lastRole?.id + 1 : 1;
@@ -77,8 +79,8 @@ router.post("/store", function (req, res) {
       message: "Rol creado correctamente",
       data: roles,
     };
+    res.send(response);
   }
-  res.send(response);
 });
 
 router.put('/update', function (req, res) {
@@ -92,6 +94,7 @@ router.put('/update', function (req, res) {
       code: 502,
       message: "No existe el rol",
     };
+    res.status(502).send(response);
   } else {
     roles[roleIndex] = req.body;
 
@@ -101,8 +104,8 @@ router.put('/update', function (req, res) {
       message: "Rol editado correctamente",
       data: req.body,
     };
+    res.send(response);
   }
-  res.send(response);
  });
 
  router.delete('/delete/:roleId', function (req, res) {
@@ -114,6 +117,7 @@ router.put('/update', function (req, res) {
       code: 502,
       message: "No existe el rol",
     };
+    res.status(502).send(response);
   } else {
     roles.splice(index, 1);
 
@@ -123,8 +127,8 @@ router.put('/update', function (req, res) {
       message: "Rol eliminado correctamente",
       data: roles,
     };
+    res.send(response);
   }
-  res.send(response);
  });
 
 module.exports = router;

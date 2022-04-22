@@ -11,9 +11,6 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
-  @Input() data: any;
-  @Output() sendFormValues: EventEmitter<any> = new EventEmitter();
-
   public form: FormGroup;
   public disabled: boolean = true;
   public roles: Array<any> = [];
@@ -66,13 +63,11 @@ export class UserFormComponent implements OnInit {
       this.title = 'Editar usuario';
       this._userService.getUser(this.id).subscribe(
         (user) => {
-          if (!user.error) {
-            this.form.setValue({ ...user.data })
-          } else {
-            this._router.navigate(['/usuario']);
-          }
+          this.form.setValue({ ...user.data });
         },
-        (error) => console.error('error', error)
+        (error) => {
+          this._router.navigate(['/usuario']);
+        }
       );
     } else {
       this.title = 'Crear usuario';
@@ -85,14 +80,6 @@ export class UserFormComponent implements OnInit {
 
   get fc() {
     return this.form.controls;
-  }
-
-  public save(): void {
-    this.sendFormValues.emit(this.form.value);
-  }
-
-  public cancel(): void {
-    this.sendFormValues.emit(undefined);
   }
 
   public submit(): void {
@@ -110,8 +97,8 @@ export class UserFormComponent implements OnInit {
         },
         (error) => console.log('error', error)
       );
-      this.form.reset();
-      this.setForm();
+      /* this.form.reset();
+      this.setForm(); */
     }
   }
 }

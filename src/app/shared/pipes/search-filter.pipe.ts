@@ -10,7 +10,7 @@ export class SearchFilterPipe implements PipeTransform {
 
     args = args.toLowerCase().trim();
 
-    return value.filter(function (data) {
+    return value.map(({id, ...value}) => value).filter(function (data) {
       return JSON.stringify(data).toLowerCase().includes(args);
     });
   }
