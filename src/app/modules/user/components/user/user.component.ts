@@ -16,7 +16,10 @@ export class UserComponent implements OnInit {
   constructor(private _userService: UserService) {}
 
   ngOnInit(): void {
-    this._userService.getAll().subscribe((data) => (this.users = data));
+    this._userService.getAll().subscribe(
+      (user) => (this.users = user.data),
+      (error) => console.log('error', error),
+      );
   }
 
   public listenModalButtons(event: any): void {
@@ -27,11 +30,11 @@ export class UserComponent implements OnInit {
       if (event?.id !== null) {
         this._userService
           .updateUser(event)
-          .subscribe((data) => (this.users = data));
+          .subscribe((user) => (this.users = user.data));
       } else {
         this._userService
           .saveUser(event)
-          .subscribe((data) => (this.users = data));
+          .subscribe((user) => (this.users = user.data));
       }
       this.showModal = false;
       this.user = false;
@@ -50,6 +53,9 @@ export class UserComponent implements OnInit {
   public deleteUser(userId: any): void {
     this._userService
       .deleteUser(userId)
-      .subscribe((data) => (this.users = data));
+      .subscribe(
+        (user) => (this.users = user.data),
+        (error) => console.error('error', error),
+        );
   }
 }

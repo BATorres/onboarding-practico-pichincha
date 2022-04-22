@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
 import { RoleService } from '../../../../modules/role/services/role.service';
 import { UserService } from '../../services/user.service';
@@ -24,7 +24,8 @@ export class UserFormComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _roleService: RoleService,
     private _activatedRoute: ActivatedRoute,
-    private _userService: UserService
+    private _userService: UserService,
+    private _router: Router
   ) {}
 
   ngOnInit(): void {
@@ -63,16 +64,17 @@ export class UserFormComponent implements OnInit {
     this.id = this._activatedRoute.snapshot.params['id'];
     if (this.id !== undefined) {
       this.title = 'Editar usuario';
-      this._userService
-        .getUser(this.id)
-        .subscribe((data) => this.form.setValue({ ...data }));
+      this._userService.getUser(this.id).subscribe(
+        (user) => this.form.setValue({ ...user.data }),
+        (error) => console.error('error', error)
+      );
     } else {
       this.title = 'Crear usuario';
     }
   }
 
   public getRoles(): void {
-    this._roleService.getAll().subscribe((data) => (this.roles = data));
+    this._roleService.getAll().subscribe((roles) => (this.roles = roles.data));
   }
 
   get fc() {
@@ -89,9 +91,19 @@ export class UserFormComponent implements OnInit {
 
   public submit(): void {
     if (this.id !== undefined) {
-      this._userService.updateUser(this.form.value);
+      this._userService.updateUser(this.form.value).subscribe(
+        (user) => {
+          this._router.navigate(['/usuario']);
+        },
+        (error) => console.error('error', error)
+      );
     } else {
-      this._userService.saveUser(this.form.value);
+      this._userService.saveUser(this.form.value).subscribe(
+        (user) => {
+          this._router.navigate(['/usuario']);
+        },
+        (error) => console.log('error', error)
+      );
       this.form.reset();
       this.setForm();
     }
