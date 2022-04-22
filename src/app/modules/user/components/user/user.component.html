@@ -18,7 +18,7 @@
 </div>
 
 <div class="row pt-5 pb-5">
-  <div class="col-12" style="overflow-x: auto;">
+  <div class="col-12" style="overflow-x: auto">
     <table>
       <thead>
         <tr>
@@ -37,15 +37,29 @@
             {{ user.role }}
           </td>
           <td class="text-center">
-            <a class="btn btn-global" [routerLink]="['/usuario/editar', user?.id]">Editar</a>
-            <button class="btn btn-global" (click)="deleteUser(user?.id)">Eliminar</button>
+            <a
+              class="btn btn-global"
+              [routerLink]="['/usuario/editar', user?.id]"
+              >Editar</a
+            >
+            <button class="btn btn-global" (click)="deleteUser(user)">
+              Eliminar
+            </button>
           </td>
         </tr>
-        
+
         <tr *ngIf="users.length === 0">
           <td colspan="4">No existen registros</td>
         </tr>
       </tbody>
     </table>
   </div>
+</div>
+
+<div *ngIf="showModal">
+  <app-confirmation-modal
+    [module]="'usuario'"
+    [data]="user"
+    (sendModalResponse)="listenModalButtons($event)"
+  ></app-confirmation-modal>
 </div>

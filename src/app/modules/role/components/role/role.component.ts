@@ -20,19 +20,15 @@ export class RoleComponent implements OnInit {
   }
 
   public listenModalButtons(event: any): void {
-    if (event === undefined) {
-      this.showModal = false;
-      this.role = undefined;
+    if (event) {
+      this._roleService.deleteRole(this.role.id).subscribe(
+        (role) => {
+          this.showModal = false;
+          this.roles = role.data;
+        },
+        (error) => console.error('error', error)
+      );
     } else {
-      if (event?.id !== null) {
-        this._roleService
-          .updateRole(event)
-          .subscribe((data) => (this.roles = data));
-      } else {
-        this._roleService
-          .saveRole(event)
-          .subscribe((role) => (this.roles = role.data));
-      }
       this.showModal = false;
       this.role = undefined;
     }
@@ -47,12 +43,8 @@ export class RoleComponent implements OnInit {
     this.showModal = true;
   }
 
-  public deleteRole(roleId: any): void {
-    this._roleService
-      .deleteRole(roleId)
-      .subscribe(
-        (role) => (this.roles = role.data),
-        (error) => console.log('error', error),
-        );
+  public deleteRole(role: any): void {
+    this.showModal = true;
+    this.role = role;
   }
 }

@@ -1,0 +1,32 @@
+<div class="modal-overlay" id="modal-overlay"></div>
+
+<div class="confirmation-modal">
+  <div class="row">
+    <div class="col-10">
+      <h3>Eliminar {{ module }}</h3>
+    </div>
+    <div class="col-2">
+      <button class="btn btn-ligth" style="float: right" (click)="cancel()">
+        X
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-11">
+      ¿Está seguro que desea eliminar el {{ module }} <b>{{ data.name }}</b
+      >?
+    </div>
+  </div>
+
+  <div class="row pb-3">
+    <div class="col-12">
+      <button class="btn btn-global modal-buttons" (click)="cancel()">
+        Cancelar
+      </button>
+      <button class="btn btn-global modal-buttons" (click)="save()">
+        Aceptar
+      </button>
+    </div>
+  </div>
+</div>

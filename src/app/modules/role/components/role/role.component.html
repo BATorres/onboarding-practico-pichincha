@@ -32,7 +32,7 @@
           </td>
           <td class="text-center">
               <a class="btn btn-global" [routerLink]="['/rol/editar', role?.id]">Editar</a>
-              <button class="btn btn-global" (click)="deleteRole(role?.id)">Eliminar</button>
+              <button class="btn btn-global" (click)="deleteRole(role)">Eliminar</button>
           </td>
         </tr>
 
@@ -42,4 +42,12 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div *ngIf="showModal">
+  <app-confirmation-modal 
+  [module]="'rol'"
+  [data]="role"
+  (sendModalResponse)="listenModalButtons($event)"
+  ></app-confirmation-modal>
 </div>
