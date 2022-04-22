@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { debounceTime } from 'rxjs';
 import { RoleService } from '../../services/role.service';
 
@@ -22,6 +22,7 @@ export class RoleFormComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _roleService: RoleService,
     private _activatedRoute: ActivatedRoute,
+    private _router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -58,7 +59,13 @@ export class RoleFormComponent implements OnInit {
       this.title = 'Editar rol';
       this._roleService
         .getRole(this.id)
-        .subscribe((data) => this.form.setValue({ ...data }));
+        .subscribe(
+          (role) => {
+            console.log('quejesto?', role)
+            this.form.setValue({ ...role.data })
+          },
+          (error) => console.log('error', error)
+        );
     } else {
       this.title = 'Crear rol'
     }
@@ -78,11 +85,25 @@ export class RoleFormComponent implements OnInit {
 
   public submit(): void {
     if (this.id !== undefined) {
-      this._roleService.updateRole(this.form.value);
+      this._roleService.updateRole(this.form.value).subscribe(
+        (role) => {
+          this._router.navigate(['/rol']);
+        },
+        (error) => {
+          console.log('error', error)
+        }
+      );
     } else {
-      this._roleService.saveRole(this.form.value);
-      this.form.reset();
-      this.setForm();
+      this._roleService.saveRole(this.form.value).subscribe(
+        (role) => {
+          this._router.navigate(['/rol']);
+        },
+        (error) => {
+          console.log('error', error)
+        }
+      );
+      /* this.form.reset();
+      this.setForm(); */
     }
   }
 }

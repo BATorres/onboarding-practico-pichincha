@@ -16,7 +16,7 @@ export class RoleComponent implements OnInit {
   constructor(private _roleService: RoleService) {}
 
   ngOnInit(): void {
-    this._roleService.getAll().subscribe((data) => (this.roles = data));
+    this._roleService.getAll().subscribe((role) => (this.roles = role.data));
   }
 
   public listenModalButtons(event: any): void {
@@ -31,7 +31,7 @@ export class RoleComponent implements OnInit {
       } else {
         this._roleService
           .saveRole(event)
-          .subscribe((data) => (this.roles = data));
+          .subscribe((role) => (this.roles = role.data));
       }
       this.showModal = false;
       this.role = undefined;
@@ -50,6 +50,9 @@ export class RoleComponent implements OnInit {
   public deleteRole(roleId: any): void {
     this._roleService
       .deleteRole(roleId)
-      .subscribe((data) => (this.roles = data));
+      .subscribe(
+        (role) => (this.roles = role.data),
+        (error) => console.log('error', error),
+        );
   }
 }
