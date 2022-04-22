@@ -24,4 +24,41 @@ describe('RoleService', () => {
       done();
     });
   });
+
+  it('Debe traer el rol Administrador', (done) => {
+    service.getRole(1).subscribe( role => {
+      expect(role.data).toStrictEqual({
+        id: 1,
+        name: 'Administrador',
+      });
+
+      done();
+    });
+  });
+
+  it('Debe crear un rol con el nombre Prueba', (done) => {
+    const data = { id: null, name: 'Prueba' };
+    service.saveRole(data).subscribe( role => {
+      expect(role.data.length).toBeGreaterThan(0);
+
+      done();
+    });
+  });
+
+  it('Debe editar el rol Administrador por Administradores', (done) => {
+    const data = { id: 1, name: 'Administradores' };
+    service.updateRole(data).subscribe( role => {
+      expect(role.data).toStrictEqual(data);
+
+      done();
+    });
+  });
+
+  it('Debe eliminar el rol con id 4', (done) => {
+    service.deleteRole(4).subscribe( role => {
+      expect(role.data.length).toBeGreaterThan(0);
+
+      done();
+    });
+  });
 });
