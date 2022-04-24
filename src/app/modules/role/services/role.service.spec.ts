@@ -25,7 +25,7 @@ describe('RoleService', () => {
     });
   });
 
-  it('Debe traer el rol Administrador', (done) => {
+  it('Debe traer el rol "Administrador"', (done) => {
     service.getRole(1).subscribe( role => {
       expect(role.data).toStrictEqual({
         id: 1,
@@ -36,7 +36,7 @@ describe('RoleService', () => {
     });
   });
 
-  it('Debe crear un rol con el nombre Prueba', (done) => {
+  it('Debe crear un rol con el nombre "Prueba"', (done) => {
     const data = { id: null, name: 'Prueba' };
     service.saveRole(data).subscribe( role => {
       expect(role.data.length).toBeGreaterThan(0);
@@ -45,7 +45,7 @@ describe('RoleService', () => {
     });
   });
 
-  it('Debe editar el rol Prueba por Prueba Editada', (done) => {
+  it('Debe editar el nombre del rol "Prueba" por "Prueba Editada"', (done) => {
     const data = { id: 4, name: 'Prueba Editada' };
     service.updateRole(data).subscribe( role => {
       expect(role.data).toStrictEqual(data);
@@ -57,6 +57,17 @@ describe('RoleService', () => {
   it('Debe eliminar el rol con id 4', (done) => {
     service.deleteRole(4).subscribe( role => {
       expect(role.data.length).toBeGreaterThan(0);
+
+      done();
+    });
+  });
+
+  it('Debe buscar el rol con nombre "Administrador"', (done) => {
+    service.searchRoles('Administrador').subscribe( role => {
+      expect(role.data).toStrictEqual({
+        id: 1,
+        name: 'Administrador',
+      });
 
       done();
     });

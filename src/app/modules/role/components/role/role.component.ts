@@ -42,4 +42,20 @@ export class RoleComponent implements OnInit {
     this.title ='Eliminar rol';
     this.message = `¿Está seguro que desea eliminar el rol <b>${ role?.name }</b>?`;
   }
+
+  public search(event): void {
+    const query = event.target.value;
+
+    if (query.trim() !== '') {
+      this._roleService.searchRoles(query.toLowerCase().trim()).subscribe(
+        (roles) => this.roles = roles.data,
+        (error) => console.error(error)
+      );
+    } else {
+      this._roleService.getAll().subscribe(
+        (roles) => (this.roles = roles.data),
+        (error) => console.log(error)
+      );
+    }
+  }
 }

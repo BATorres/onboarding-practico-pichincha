@@ -25,7 +25,7 @@ describe('UserService', () => {
     });
   });
 
-  it('Debe traer el usuario con nombre Usuario 1', (done) => {
+  it('Debe traer el usuario con nombre "Usuario 1"', (done) => {
     service.getUser(1).subscribe( usuario => {
       expect(usuario.data).toStrictEqual({
         id: 1,
@@ -38,7 +38,7 @@ describe('UserService', () => {
     });
   });
 
-  it('Debe crear un nuevo usuario con el nombre Prueba y el rol Gerente', (done) => {
+  it('Debe crear un nuevo usuario con el nombre "Prueba" y el rol "Gerente"', (done) => {
     const data = { 
       id: null, 
       name: 'Prueba',
@@ -53,7 +53,7 @@ describe('UserService', () => {
     });
   });
 
-  it('Debe editar el nombre del Prueba a Prueba Editada', (done) => {
+  it('Debe editar el nombre del usuario "Prueba" a "Prueba Editada"', (done) => {
     const data = { 
       id: 3, 
       name: 'Prueba editada',
@@ -71,6 +71,32 @@ describe('UserService', () => {
   it('Debe eliminar el rol con id 3', (done) => {
     service.deleteUser(3).subscribe( usuario => {
       expect(usuario.data.length).toBeGreaterThan(0);
+
+      done();
+    });
+  });
+
+  it('Debe buscar el usuario con nombre "Usuario 1"', (done) => {
+    service.searchUsers('Usuario 1').subscribe( usuario => {
+      expect(usuario.data).toStrictEqual({
+        id: 1,
+        name: 'Usuario 1',
+        email: 'usuario1@gmail.com',
+        role: 'Administrador',
+      });
+
+      done();
+    });
+  });
+  
+  it('Debe buscar el usuario con correo "usuario2@gmail.com"', (done) => {
+    service.searchUsers('usuario2@gmail.com').subscribe( usuario => {
+      expect(usuario.data).toStrictEqual({
+        id: 1,
+        name: 'Usuario 2',
+        email: 'usuario2@gmail.com',
+        role: 'Administrador',
+      });
 
       done();
     });

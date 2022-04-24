@@ -45,4 +45,20 @@ export class UserComponent implements OnInit {
     this.title ='Eliminar usuario';
     this.message = `¿Está seguro que desea eliminar el usuario <b>${ user?.name }</b>?`;
   }
+
+  public search(event): void {
+    const query = event.target.value;
+
+    if (query.trim() !== '') {
+      this._userService.searchUsers(query.toLowerCase().trim()).subscribe(
+        (users) => this.users = users.data,
+        (error) => console.error(error)
+      );
+    } else {
+      this._userService.getAll().subscribe(
+        (user) => (this.users = user.data),
+        (error) => console.log(error)
+      );
+    }
+  }
 }

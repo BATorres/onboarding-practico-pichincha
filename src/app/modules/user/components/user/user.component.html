@@ -6,6 +6,7 @@
       class="form-control"
       type="text"
       placeholder="Busque un usuario por su nombre"
+      (keyup)="search($event)"
       [(ngModel)]="searchQuery"
     />
   </div>
@@ -26,7 +27,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of users | searchFilter: searchQuery">
+        <tr *ngFor="let user of users">
           <td>
             {{ user.name }}
           </td>

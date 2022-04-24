@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { delay, Observable, of } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
@@ -38,5 +38,10 @@ export class RoleService {
   public deleteRole(roleId: number): Observable<any> {
     const url = `${this.url}/role/delete/${roleId}`;
     return this._httpClient.delete(url);
+  }
+
+  public searchRoles(query: string): Observable<any> {
+    const url = `${this.url}/role/search/${query}`;
+    return this._httpClient.get(url).pipe(delay(500));
   }
 }

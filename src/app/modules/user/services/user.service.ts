@@ -44,4 +44,9 @@ export class UserService {
     const url = `${this.url}/user/email/${userEmail}`;
     return this._httpClient.get(url).pipe(delay(1000));
   }
+
+  public searchUsers(query: string): Observable<any> {
+    const url = `${this.url}/user/search/${query}`;
+    return this._httpClient.get(url).pipe(delay(500));
+  }
 }

@@ -141,4 +141,21 @@ router.get("/email/:userEmail", function (req, res) {
   res.send(response);
 });
 
+router.get("/search/:query?", function (req, res) {
+  const filteredUsers = users
+    .map(({ id, ...values }) => values)
+    .filter((user) =>
+      JSON.stringify(user).toLowerCase().includes(req.params.query)
+    );
+
+  response = {
+    error: false,
+    code: 200,
+    message: "Usuarios encontrados",
+    data: filteredUsers,
+  };
+
+  res.send(response);
+});
+
 module.exports = router;

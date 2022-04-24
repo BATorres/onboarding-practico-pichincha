@@ -131,4 +131,21 @@ router.put('/update', function (req, res) {
   }
  });
 
+ router.get("/search/:query?", function (req, res) {
+  const filteredRoles = roles
+    .map(({ id, ...values }) => values)
+    .filter((role) =>
+      JSON.stringify(role).toLowerCase().includes(req.params.query)
+    );
+
+  response = {
+    error: false,
+    code: 200,
+    message: "Usuarios encontrados",
+    data: filteredRoles,
+  };
+
+  res.send(response);
+});
+
 module.exports = router;
