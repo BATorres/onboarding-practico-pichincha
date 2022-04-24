@@ -18,7 +18,7 @@ export class RoleComponent implements OnInit {
   constructor(private _roleService: RoleService) {}
 
   ngOnInit(): void {
-    this._roleService.getAll().subscribe((role) => (this.roles = role.data));
+    this._roleService.getAll().subscribe((role) => (this.roles = role.data), (error) => console.error(error));
   }
 
   public listenConfirmationModalButtons(event: any): void {
@@ -28,7 +28,7 @@ export class RoleComponent implements OnInit {
           this.showModal = false;
           this.roles = role.data;
         },
-        (error) => console.error('error', error)
+        (error) => console.error(error)
       );
     } else {
       this.showModal = false;

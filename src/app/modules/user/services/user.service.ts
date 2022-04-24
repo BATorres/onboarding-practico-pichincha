@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { delay, Observable, of } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
 @Injectable({
@@ -38,5 +38,10 @@ export class UserService {
   public deleteUser(userId: number): Observable<any> {
     const url = `${this.url}/user/delete/${userId}`;
     return this._httpClient.delete(url);
+  }
+
+  public getSimilarEmail(userEmail: string): Observable<any> {
+    const url = `${this.url}/user/email/${userEmail}`;
+    return this._httpClient.get(url).pipe(delay(1000));
   }
 }

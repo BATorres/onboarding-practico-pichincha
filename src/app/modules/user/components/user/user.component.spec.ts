@@ -1,13 +1,15 @@
-import { APP_BASE_HREF, CommonModule } from '@angular/common';
+import { APP_BASE_HREF, CommonModule, Location } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule, Routes } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
+import { ConfirmationModalComponent } from '../../../../shared/components/confirmation-modal/confirmation-modal.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { UserService } from '../../services/user.service';
+import { UserFormComponent } from '../user-form/user-form.component';
 
 import { UserComponent } from './user.component';
 
@@ -15,17 +17,23 @@ describe('UserComponent', () => {
   let component: UserComponent;
   let fixture: ComponentFixture<UserComponent>;
   const service = new UserService(null);
+  let compiled: HTMLElement;
+  let location: Location;
+  let router: Router;
+  const routes = [
+    {path: 'nuevo', component: UserFormComponent},
+  ] as Routes;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserComponent ],
+      declarations: [ UserComponent, ConfirmationModalComponent ],
       imports: [ 
         CommonModule,
         FormsModule,
         ReactiveFormsModule, 
         SharedModule,
         HttpClientTestingModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes(routes),
       ],
       providers: [
         {provide: APP_BASE_HREF, useValue: '/'},
@@ -35,10 +43,13 @@ describe('UserComponent', () => {
   });
 
   beforeEach(() => {
+    location = TestBed.get(Location);
+    router = TestBed.get(Router);
     fixture = TestBed.createComponent(UserComponent);
     component = fixture.componentInstance;
     component = new UserComponent(service);
     fixture.detectChanges();
+    compiled = fixture.nativeElement;
   });
 
   it('should create', () => {
@@ -61,22 +72,22 @@ describe('UserComponent', () => {
       },
     ];
     
-    jest.spyOn(component._userService, 'getAll').mockImplementation(() => of({data: users}));
+    jest.spyOn(service, 'getAll').mockImplementation(() => of({data: users}));
 
     component.ngOnInit();
     expect( component.users.length ).toBeGreaterThan(0);
   });
 
-  /*it('deleteUser debe llamar al servicio y eliminar el usuario con id 2', () => {
-    const spy = jest.spyOn(service, 'deleteUser').mockImplementation(() => of([]));
+  it('Al seleccionar la opción "Eliminar" en tabla, se debe mostrar el modal de confirmación', () => {
+    const userToDelete = {
+      id: 1,
+      name: 'Usuario 1',
+      email: 'usuario1@gmail.com',
+      role: 'Gerente',
+    };
+    component.deleteUser(userToDelete);
+    fixture.detectChanges();
 
-    component.deleteUser(2);
-    expect(spy).toBeCalledWith(2);
-  }); */
-
-  it('El botón +Nuevo debe ser un enlace a la ruta /usuario/nuevo', () => {
-    let href = fixture.debugElement.query(By.css('a')).nativeElement.getAttribute('href');
-    
-    expect(href).toEqual('/usuario/nuevo');
+    expect(component.showModal).toBe(true);
   });
 });

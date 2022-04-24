@@ -20,7 +20,7 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
     this._userService.getAll().subscribe(
       (user) => (this.users = user.data),
-      (error) => console.log('error', error)
+      (error) => console.log(error)
     );
   }
 
@@ -31,7 +31,7 @@ export class UserComponent implements OnInit {
           this.showModal = false;
           this.users = user.data;
         },
-        (error) => console.error('error', error)
+        (error) => console.error(error)
       );
     } else {
       this.showModal = false;

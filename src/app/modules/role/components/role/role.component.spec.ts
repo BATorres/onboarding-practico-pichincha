@@ -65,16 +65,14 @@ describe('RoleComponent', () => {
     expect( component.roles.length ).toBeGreaterThan(0);
   });
 
-  /* it('deleteRole debe llamar al servicio y eliminar el rol con id 2', () => {
-    const spy = jest.spyOn(service, 'deleteRole').mockImplementation(() => of([]));
+  it('Al seleccionar la opción "Eliminar" en tabla, se debe mostrar el modal de confirmación', () => {
+    const roleToDelete = {
+      id: 1,
+      name: 'Administrador',
+    };
+    component.deleteRole(roleToDelete);
+    fixture.detectChanges();
 
-    component.deleteRole(2);
-    expect(spy).toBeCalledWith(2);
-  }); */
-
-  it('El botón +Nuevo debe ser un enlace a la ruta /rol/nuevo', () => {
-    let href = fixture.debugElement.query(By.css('a')).nativeElement.getAttribute('href');;
-    
-    expect( href ).toEqual('/rol/nuevo');
+    expect(component.showModal).toBe(true);
   });
 });

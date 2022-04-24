@@ -1,19 +1,19 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 let users = [
   {
     id: 1,
-    name: 'Usuario 1',
-    email: 'usuario1@gmail.com',
-    role: 'Administrador',
+    name: "Usuario 1",
+    email: "usuario1@gmail.com",
+    role: "Administrador",
   },
   {
     id: 2,
-    name: 'Usuario 2',
-    email: 'usuario2@gmail.com',
-    role: 'Administrador',
-  }
+    name: "Usuario 2",
+    email: "usuario2@gmail.com",
+    role: "Administrador",
+  },
 ];
 
 let response = {
@@ -32,7 +32,7 @@ router.get("/", function (req, res) {
   res.send(response);
 });
 
-router.get('/:userId', function (req, res) {
+router.get("/:userId", function (req, res) {
   const userIndex = users.findIndex((user) => {
     return user?.id === +req.params.userId;
   });
@@ -79,7 +79,7 @@ router.post("/store", function (req, res) {
   }
 });
 
-router.put('/update', function (req, res) {
+router.put("/update", function (req, res) {
   const userIndex = users.findIndex((user) => {
     return user?.id === +req.body.id;
   });
@@ -102,9 +102,9 @@ router.put('/update', function (req, res) {
     };
     res.send(response);
   }
- });
+});
 
- router.delete('/delete/:userId', function (req, res) {
+router.delete("/delete/:userId", function (req, res) {
   const index = users.findIndex((user) => user.id === +req.params.userId);
 
   if (index === -1) {
@@ -125,6 +125,20 @@ router.put('/update', function (req, res) {
     };
     res.send(response);
   }
- });
+});
+
+router.get("/email/:userEmail", function (req, res) {
+  const existingEmail = users.filter((user) =>
+    user.email.includes(req.params.userEmail)
+  );
+
+  response = {
+    error: false,
+    code: 200,
+    message: "Usuarios encontrados",
+    data: existingEmail,
+  };
+  res.send(response);
+});
 
 module.exports = router;

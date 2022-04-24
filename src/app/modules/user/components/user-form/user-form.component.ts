@@ -1,7 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  AsyncValidatorFn,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { debounceTime } from 'rxjs';
+import { debounceTime, map, Observable } from 'rxjs';
 import { RoleService } from '../../../../modules/role/services/role.service';
 import { UserService } from '../../services/user.service';
 
@@ -52,6 +59,7 @@ export class UserFormComponent implements OnInit {
       email: [
         null,
         Validators.compose([Validators.required, Validators.email]),
+        [this.emailValidator()],
       ],
       role: [null, Validators.required],
     });
@@ -100,5 +108,23 @@ export class UserFormComponent implements OnInit {
       /* this.form.reset();
       this.setForm(); */
     }
+  }
+
+  public emailValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return this._userService.getSimilarEmail(control.value).pipe(
+        map((res) => {
+          if (res.data.length > 0) {
+            if (this.id !== null && res.data[0]?.id === +this.id) {
+              return null;
+            } else {
+              return { emailExists: true };
+            }
+          } else {
+            return null;
+          }
+        })
+      );
+    };
   }
 }

@@ -61,6 +61,10 @@
               <div *ngIf="fc['email'].errors['email']">
                 El email ingresado no es válido
               </div>
+
+              <div *ngIf="fc['email'].hasError('emailExists')">
+                Ya existe un usuario con el correo ingresado
+              </div>
             </div>
           </div>
 
@@ -71,7 +75,7 @@
               name="roles"
               formControlName="role"
               [ngClass]="{
-                'is-invalid': fc['role'].errors && fc['email'].touched
+                'is-invalid': form.invalid && fc['role'].errors && fc['role'].touched
               }"
             >
               <option value="" disabled selected hidden>Escoja un rol</option>

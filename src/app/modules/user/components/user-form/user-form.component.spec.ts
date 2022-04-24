@@ -63,6 +63,8 @@ describe('UserFormComponent', () => {
     const spy = jest.spyOn(service, 'getUser').mockImplementation(() => of([]));
 
     component.getData();
+    fixture.detectChanges();
+    console.log('quejesto', component.form.value)
     expect(component.form.value).toStrictEqual(expectedUser);
   }); */
 
@@ -82,6 +84,7 @@ describe('UserFormComponent', () => {
   /* it('Crear usuario válido', () => {
     component.id = undefined;
     component.form.setValue({...validForm});
+    fixture.detectChanges();
 
     const spy = jest.spyOn(service, 'saveUser').mockImplementation(() => of([]));
 
