@@ -13,7 +13,7 @@ export class UserComponent implements OnInit {
   public user: any = undefined;
   public showModal = false;
 
-  constructor(private _userService: UserService) {}
+  constructor(public _userService: UserService) {}
 
   ngOnInit(): void {
     this._userService.getAll().subscribe(
@@ -22,7 +22,7 @@ export class UserComponent implements OnInit {
     );
   }
 
-  public listenModalButtons(event: any): void {
+  public listenConfirmationModalButtons(event: any): void {
     if (event) {
       this._userService.deleteUser(this.user.id).subscribe(
         (user) => {
@@ -35,15 +35,6 @@ export class UserComponent implements OnInit {
       this.showModal = false;
       this.user = undefined;
     }
-  }
-
-  public createUser(): void {
-    this.showModal = true;
-  }
-
-  public editUser(user: any): void {
-    this.user = user;
-    this.showModal = true;
   }
 
   public deleteUser(user: any): void {

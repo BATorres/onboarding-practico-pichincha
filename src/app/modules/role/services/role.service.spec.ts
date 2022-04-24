@@ -45,8 +45,8 @@ describe('RoleService', () => {
     });
   });
 
-  it('Debe editar el rol Administrador por Administradores', (done) => {
-    const data = { id: 1, name: 'Administradores' };
+  it('Debe editar el rol Prueba por Prueba Editada', (done) => {
+    const data = { id: 4, name: 'Prueba Editada' };
     service.updateRole(data).subscribe( role => {
       expect(role.data).toStrictEqual(data);
 

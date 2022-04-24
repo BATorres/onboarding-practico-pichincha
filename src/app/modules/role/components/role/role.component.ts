@@ -19,7 +19,7 @@ export class RoleComponent implements OnInit {
     this._roleService.getAll().subscribe((role) => (this.roles = role.data));
   }
 
-  public listenModalButtons(event: any): void {
+  public listenConfirmationModalButtons(event: any): void {
     if (event) {
       this._roleService.deleteRole(this.role.id).subscribe(
         (role) => {
@@ -32,15 +32,6 @@ export class RoleComponent implements OnInit {
       this.showModal = false;
       this.role = undefined;
     }
-  }
-
-  public createRole(): void {
-    this.showModal = true;
-  }
-
-  public editRole(role: any): void {
-    this.role = role;
-    this.showModal = true;
   }
 
   public deleteRole(role: any): void {

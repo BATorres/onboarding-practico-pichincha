@@ -43,7 +43,7 @@ describe('RoleComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  /* it('Init: debe cargar los roles', () => {
+  it('Init: debe cargar los roles', () => {
     const roles: Array<any> = [
       {
         id: 1,
@@ -59,14 +59,13 @@ describe('RoleComponent', () => {
       }
     ];
     
-    jest.spyOn(service, 'getAll').mockImplementation(() => of(roles));
+    jest.spyOn(service, 'getAll').mockImplementation(() => of({ data: roles}));
 
     component.ngOnInit();
-    console.log('roles', component.roles)
     expect( component.roles.length ).toBeGreaterThan(0);
   });
 
-  it('deleteRole debe llamar al servicio y eliminar el rol con id 2', () => {
+  /* it('deleteRole debe llamar al servicio y eliminar el rol con id 2', () => {
     const spy = jest.spyOn(service, 'deleteRole').mockImplementation(() => of([]));
 
     component.deleteRole(2);

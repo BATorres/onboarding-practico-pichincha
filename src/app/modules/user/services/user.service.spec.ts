@@ -53,11 +53,11 @@ describe('UserService', () => {
     });
   });
 
-  it('Debe editar el rol del Usuario 1 de Administrador a Gerente', (done) => {
+  it('Debe editar el nombre del Prueba a Prueba Editada', (done) => {
     const data = { 
-      id: 1, 
-      name: 'Usuario 1',
-      email: 'usuario1@gmail.com',
+      id: 3, 
+      name: 'Prueba editada',
+      email: 'prueba@gmail.com',
       role: 'Gerente', 
     };
 
