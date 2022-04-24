@@ -12,6 +12,8 @@ export class UserComponent implements OnInit {
   public users: Array<any> = [];
   public user: any = undefined;
   public showModal = false;
+  public title: string;
+  public message: string;
 
   constructor(public _userService: UserService) {}
 
@@ -40,11 +42,7 @@ export class UserComponent implements OnInit {
   public deleteUser(user: any): void {
     this.showModal = true;
     this.user = user;
-    /* this._userService
-      .deleteUser(userId)
-      .subscribe(
-        (user) => (this.users = user.data),
-        (error) => console.error('error', error),
-        ); */
+    this.title ='Eliminar usuario';
+    this.message = `¿Está seguro que desea eliminar el usuario <b>${ user?.name }</b>?`;
   }
 }

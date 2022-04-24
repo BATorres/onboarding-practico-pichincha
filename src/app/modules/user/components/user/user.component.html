@@ -58,8 +58,8 @@
 
 <div *ngIf="showModal">
   <app-confirmation-modal
-    [module]="'usuario'"
-    [data]="user"
+    [title]="title"
+    [message]="message"
     (sendModalResponse)="listenConfirmationModalButtons($event)"
   ></app-confirmation-modal>
 </div>

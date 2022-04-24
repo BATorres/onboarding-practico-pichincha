@@ -3,29 +3,39 @@
 <div class="confirmation-modal">
   <div class="row">
     <div class="col-10">
-      <h3>Eliminar {{ module }}</h3>
+      <h3>{{ title }}</h3>
     </div>
     <div class="col-2">
-      <button class="btn btn-ligth" style="float: right" (click)="cancel()">
+      <button
+        class="btn btn-ligth"
+        style="float: right"
+        (click)="cancel()"
+        data-test="btn-close"
+      >
         X
       </button>
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-11">
-      ¿Está seguro que desea eliminar el {{ module }} <b>{{ data?.name }}</b
-      >?
-    </div>
+  <div class="row pt-3">
+    <div class="col-11" [innerHTML]="message"></div>
   </div>
 
-  <div class="row pb-3">
+  <div class="row pt-4 pb-3">
     <div class="col-12">
-      <button class="btn btn-global modal-buttons" (click)="cancel()">
+      <button
+        class="btn btn-global modal-buttons"
+        (click)="cancel()"
+        data-test="btn-delete"
+      >
         Cancelar
       </button>
-      <button class="btn btn-global modal-buttons" (click)="save()">
-        Aceptar
+      <button
+        class="btn btn-global modal-buttons"
+        (click)="delete()"
+        data-test="btn-delete"
+      >
+        Eliminar
       </button>
     </div>
   </div>

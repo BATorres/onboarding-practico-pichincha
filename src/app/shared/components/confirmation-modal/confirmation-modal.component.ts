@@ -6,19 +6,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./confirmation-modal.component.scss']
 })
 export class ConfirmationModalComponent implements OnInit {
-  @Input() module: string;
-  @Input() data: any;
+  @Input() title: string;
+  @Input() message: string;
   @Output() sendModalResponse: EventEmitter<any> = new EventEmitter(); 
-
-  public title: string;
-  public disabled = true;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  public save(): void {
+  public delete(): void {
     this.sendModalResponse.emit(true);
   }
 

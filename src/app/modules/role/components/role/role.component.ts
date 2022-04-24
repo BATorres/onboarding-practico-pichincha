@@ -12,6 +12,8 @@ export class RoleComponent implements OnInit {
   public roles: Array<any> = [];
   public role: any = undefined;
   public showModal = false;
+  public title: string;
+  public message: string;
 
   constructor(private _roleService: RoleService) {}
 
@@ -37,5 +39,7 @@ export class RoleComponent implements OnInit {
   public deleteRole(role: any): void {
     this.showModal = true;
     this.role = role;
+    this.title ='Eliminar rol';
+    this.message = `¿Está seguro que desea eliminar el rol <b>${ role?.name }</b>?`;
   }
 }
