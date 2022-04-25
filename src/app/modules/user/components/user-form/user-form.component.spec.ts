@@ -71,17 +71,21 @@ describe('UserFormComponent', () => {
   it('Crear formulario válido', () => {
     component.form.setValue({...validForm});
 
+    fixture.detectChanges();
+
     expect(component.form.valid).toBeTruthy();
   });
 
-  it('Crear formulario con email no válido', () => {
+  /* it('Crear formulario con un email incorrecto', () => {
     component.form.setValue({...validForm});
     component.form.controls['email'].setValue('usuario_prueba');
+
+    fixture.detectChanges();
 
     expect(component.form.controls['email'].errors['email']).toBeTruthy();
   });
 
-  /* it('Crear usuario válido', () => {
+  it('Crear usuario válido', () => {
     component.id = undefined;
     component.form.setValue({...validForm});
     fixture.detectChanges();
