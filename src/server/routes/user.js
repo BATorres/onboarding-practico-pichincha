@@ -7,12 +7,16 @@ let users = [
     name: "Usuario 1",
     email: "usuario1@gmail.com",
     role: "Administrador",
+    password: "U$er1",
+    hobbies: ['Lectura'],
   },
   {
     id: 2,
     name: "Usuario 2",
     email: "usuario2@gmail.com",
     role: "Administrador",
+    password: "U$er2",
+    hobbies: ['Cocina'],
   },
 ];
 
@@ -67,7 +71,15 @@ router.post("/store", function (req, res) {
     const lastUser = users[users.length - 1];
     req.body.id = lastUser?.id ? lastUser?.id + 1 : 1;
 
-    users.push(req.body);
+    const newUser = {
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      role: req.body.role,
+      hobbies: req.body.hobbies,
+    };
+
+    users.push(newUser);
 
     response = {
       error: false,
@@ -92,7 +104,16 @@ router.put("/update", function (req, res) {
     };
     res.status(502).send(response);
   } else {
-    users[userIndex] = req.body;
+    const editUser = {
+      id: req.body.id,
+      name: req.body.name,
+      email: req.body.email,
+      password: req.body.password,
+      role: req.body.role,
+      hobbies: req.body.hobbies,
+    };
+    
+    users[userIndex] = editUser;
 
     response = {
       error: false,

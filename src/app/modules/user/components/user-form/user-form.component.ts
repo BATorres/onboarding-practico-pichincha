@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   AsyncValidatorFn,
+  FormArray,
   FormBuilder,
   FormGroup,
   ValidationErrors,
@@ -24,6 +25,8 @@ export class UserFormComponent implements OnInit {
   public roles: Array<any> = [];
   public id;
   public title: string;
+  public hobbiesOptions: Array<any> = ['Lectura', 'Música', 'Cocina', 'Fotografía', 'Deportes', 'Baile'];
+  public isEditing: boolean = false;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -34,7 +37,12 @@ export class UserFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.setForm();
+    this.id = this._activatedRoute.snapshot.params['id'];
+    if (this.id !== undefined) {
+      this.setForm(true);
+    } else {
+      this.setForm();
+    }
     this.getData();
     this.getRoles();
 
@@ -44,49 +52,53 @@ export class UserFormComponent implements OnInit {
 
     this.form.valueChanges.pipe(debounceTime(1000)).subscribe((fields) => {
       if (this.form.valid) {
+        console.log('vale?', this.form.value)
         this.disabled = false;
         // this.sendFormValues.emit(this.form.value);
       } else {
+        console.log('values', this.fc['hobbies'].value)
         this.disabled = true;
         // this.sendFormValues.emit(undefined);
       }
     });
   }
 
-  public setForm(): void {
-    this.form = this._formBuilder.group({
-      id: null,
-      name: [null, Validators.required],
-      email: [
-        null,
-        Validators.compose([Validators.required, Validators.email]),
-        [this.emailValidator()],
-      ],
-      role: [null, Validators.required],
-      password: [
-        null,
-        Validators.compose([
-          Validators.required,
-          Validators.maxLength(8),
-          this.passwordValidator(/\d/, { hasNumber: true }),
-          this.passwordValidator(/[A-Z]/, { hasCapitalCase: true }),
-          this.passwordValidator(/[^\w\s]+/, { hasSpecialCharacter: true }),
-        ])
-      ],
-      password_confirmation: [
-        null,
-        Validators.required
-      ],
-    }, { validator: this.confirmPassword });
+  public setForm(isEditing: boolean = false): void {
+    this.form = this._formBuilder.group(
+      {
+        id: null,
+        name: [null, Validators.required],
+        email: [
+          null,
+          Validators.compose([Validators.required, Validators.email]),
+          [this.emailValidator()],
+        ],
+        role: [null, Validators.required],
+        password: [
+          null,
+          isEditing ? null : Validators.compose([
+            Validators.required,
+            Validators.maxLength(8),
+            this.passwordValidator(/\d/, { hasNumber: true }),
+            this.passwordValidator(/[A-Z]/, { hasCapitalCase: true }),
+            this.passwordValidator(/[^\w\s]+/, { hasSpecialCharacter: true }),
+          ]),
+        ],
+        password_confirmation: [null, isEditing ? null : Validators.required],
+        hobbies: [null, Validators.compose([Validators.required, Validators.minLength(3)])],
+      },
+      { validator: this.confirmPassword }
+    );
   }
 
   public getData(): void {
-    this.id = this._activatedRoute.snapshot.params['id'];
     if (this.id !== undefined) {
       this.title = 'Editar usuario';
       this._userService.getUser(this.id).subscribe(
         (user) => {
-          this.form.setValue({ ...user.data });
+          this.isEditing = true;
+          this.form.setValue({ ...user.data, password_confirmation: null });
+          console.log('quejesto', this.form.value)
         },
         (error) => {
           this._router.navigate(['/usuario']);
@@ -149,7 +161,7 @@ export class UserFormComponent implements OnInit {
         return null;
       }
       const valid = pattern.test(control.value);
-  
+
       return valid ? null : error;
     };
   }

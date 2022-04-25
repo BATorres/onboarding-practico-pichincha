@@ -68,7 +68,7 @@
             </div>
           </div>
 
-          <div class="col-11 pt-3">
+          <div *ngIf="!isEditing" class="col-11 pt-3">
             <label>Contraseña: </label> <br><br>
             <input
               type="text"
@@ -106,7 +106,7 @@
             </div>
           </div>
 
-          <div class="col-11 pt-3">
+          <div *ngIf="!isEditing" class="col-11 pt-3">
             <label>Confirmar contraseña: </label> <br><br>
             <input
               type="text"
@@ -128,6 +128,35 @@
 
               <div *ngIf="fc['password_confirmation'].hasError('noMatch')">
                Las contraseñas no coinciden
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 pt-3">
+            <label>Intereses:</label> <br><br>
+            <select
+              class="form-control"
+              name="hobbies"
+              formControlName="hobbies"
+              [ngClass]="{
+                'is-invalid': form.invalid && fc['role'].errors && fc['role'].touched
+              }"
+              multiple
+            >
+              <option value="" disabled selected hidden>Seleccione sus intereses</option>
+              <option *ngFor="let hobby of hobbiesOptions" [value]="hobby">{{ hobby }}</option>
+            </select>
+  
+            <div
+              *ngIf="fc['hobbies'].errors && fc['hobbies'].touched"
+              class="invalid-feedback"
+            >
+              <div *ngIf="fc['hobbies'].errors['required']">
+                Los intereses son requeridos
+              </div>
+
+              <div *ngIf="fc['hobbies'].errors['minlength']">
+                Debe seleccionar al menos 3 intereses
               </div>
             </div>
           </div>
@@ -163,7 +192,7 @@
     </div>
   </div>
 
-  <div class="row pt-3 pb-3">
+  <div class="row pt-3">
     <div class="col-12">
       <a class="btn btn-global modal-buttons" href="usuario">
         Cancelar
