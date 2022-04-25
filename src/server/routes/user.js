@@ -141,12 +141,14 @@ router.get("/email/:userEmail", function (req, res) {
   res.send(response);
 });
 
-router.get("/search/:query?", function (req, res) {
-  const filteredUsers = users
-    .map(({ id, ...values }) => values)
-    .filter((user) =>
-      JSON.stringify(user).toLowerCase().includes(req.params.query)
-    );
+router.get("/search/:query", function (req, res) {
+  const filteredUsers = users.filter((user) => {
+    const values = Object.values(user);
+    values.shift();
+    return JSON.stringify(values.join())
+      .toLowerCase()
+      .includes(req.params.query);
+  });
 
   response = {
     error: false,

@@ -35,7 +35,7 @@ router.get("/", function (req, res) {
   res.send(response);
 });
 
-router.get('/:roleId', function (req, res) {
+router.get("/:roleId", function (req, res) {
   const roleIndex = roles.findIndex((role) => {
     return role?.id === +req.params.roleId;
   });
@@ -83,7 +83,7 @@ router.post("/store", function (req, res) {
   }
 });
 
-router.put('/update', function (req, res) {
+router.put("/update", function (req, res) {
   const roleIndex = roles.findIndex((role) => {
     return role?.id === +req.body.id;
   });
@@ -106,9 +106,9 @@ router.put('/update', function (req, res) {
     };
     res.send(response);
   }
- });
+});
 
- router.delete('/delete/:roleId', function (req, res) {
+router.delete("/delete/:roleId", function (req, res) {
   const index = roles.findIndex((role) => role.id === +req.params.roleId);
 
   if (index === -1) {
@@ -129,14 +129,12 @@ router.put('/update', function (req, res) {
     };
     res.send(response);
   }
- });
+});
 
- router.get("/search/:query?", function (req, res) {
-  const filteredRoles = roles
-    .map(({ id, ...values }) => values)
-    .filter((role) =>
-      JSON.stringify(role).toLowerCase().includes(req.params.query)
-    );
+router.get("/search/:query", function (req, res) {
+  const filteredRoles = roles.filter((role) =>
+    JSON.stringify(role.name).toLowerCase().includes(req.params.query)
+  );
 
   response = {
     error: false,
