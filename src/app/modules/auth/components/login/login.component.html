@@ -1,0 +1,55 @@
+<div class="form-signin">
+  <div class="card">
+    <div class="card-body py-5">
+      <form
+        class="row"
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+        novalidate
+        autocomplete="off"
+      >
+        <div class="form-group col-12">
+          <label for="email">Correo electrónico</label>
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            placeholder="Correo electrónico"
+            [ngClass]="{ 'is-invalid': submitted && fc['email'].errors }"
+          />
+          <div *ngIf="submitted && fc['email'].errors" class="invalid-feedback">
+            <div *ngIf="fc['email'].errors['required']">
+              El correo electrónico es obligatorio
+            </div>
+            <div *ngIf="fc['email'].errors['email']">
+              El campo debe ser un correo electrónico
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-12">
+          <label for="password">Contraseña</label>
+          <input
+            type="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Contraseña"
+            [ngClass]="{ 'is-invalid': submitted && fc['password'].errors }"
+          />
+          <div
+            *ngIf="submitted && fc['password'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="fc['password'].errors['required']">
+              La contraseña es obligatoria
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-12">
+          <button type="submit" class="col-12 btn btn-global">
+            Iniciar sesión
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
