@@ -54,6 +54,18 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'gerencia',
+    component: FullLayoutComponent,
+    data: { roles: ['Gerente'] },
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./modules/managment/managment.module').then((m) => m.ManagmentModule),
+      },
+    ],
+  },
 ];
 
 @NgModule({
