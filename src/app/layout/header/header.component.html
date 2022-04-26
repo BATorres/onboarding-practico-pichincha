@@ -4,8 +4,8 @@
     <label for="checkbox_toggle" class="hamburger">&#9776;</label>
 
     <div class="menu">
-      <li><a href="/usuario">Usuarios</a></li>
-      <li><a href="/rol">Roles</a></li>
+      <li *ngFor="let option of filteredMenu"><a [href]="option.path">{{ option.name }}</a></li>
+      <li (click)="logout()">Cerrar sesión</li>
     </div>
   </ul>
 </nav>

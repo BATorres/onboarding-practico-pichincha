@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.setForm();
 
     if (localStorage.getItem('user') !== null) {
-      this._router.navigate(['/']);
+      this._router.navigate(['/inicio']);
     }
   }
 
@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
       (auth) => {
         this.errorMessage = '';
         localStorage.setItem('user', JSON.stringify(auth.data));
+        this._router.navigate(['/inicio']);
       },
       (error) => {
         this.errorMessage = error.error.message;

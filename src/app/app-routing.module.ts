@@ -7,7 +7,7 @@ import { AuthGuard } from './modules/auth/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/usuario',
+    redirectTo: '/inicio',
     pathMatch: 'full',
   },
   {
@@ -21,17 +21,35 @@ const routes: Routes = [
     ],
   },
   {
-    path: '',
+    path: 'inicio',
+    component: FullLayoutComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'rol',
     component: FullLayoutComponent,
     data: { roles: ['Administrador'] },
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'rol',
+        path: '',
         loadChildren: () => import('./modules/role/role.module').then((m) => m.RoleModule),
       },
       {
         path: 'usuario',
+        data: { roles: ['Administrador', 'Gerente'] },
+        loadChildren: () => import('./modules/user/user.module').then((m) => m.UserModule),
+      },
+    ],
+  },
+  {
+    path: 'usuario',
+    component: FullLayoutComponent,
+    data: { roles: ['Administrador', 'Gerente'] },
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
         loadChildren: () => import('./modules/user/user.module').then((m) => m.UserModule),
       },
     ],
