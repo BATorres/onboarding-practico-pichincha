@@ -1,6 +1,5 @@
 <div class="form-signin">
   <div class="card">
-    <div *ngIf="errorMessage">{{ errorMessage }}</div>
     <form
         class="row"
         [formGroup]="form"
@@ -44,6 +43,7 @@
             </div>
           </div>
         </div>
+        <div class="error text-center pb-3" *ngIf="errorMessage">{{ errorMessage }}</div>
         <div class="form-group col-12">
           <button type="submit" class="col-12 btn btn-global">
             Iniciar sesión

@@ -1,12 +1,12 @@
 .card {
-    background: white;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.25);
-    border-radius: 0.25rem;
-    padding: 25px;
-    position: fixed;
-    max-width: 500px;
-  }
+  background: white;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 0.25rem;
+  padding: 25px;
+  position: fixed;
+  max-width: 500px;
+}
 
 .form-signin {
   position: absolute;
@@ -32,4 +32,13 @@
 .text-muted {
   color: #50535e !important;
   font-size: 12px;
+}
+
+.error {
+  /* background: #f46a6a;
+  background-clip: border-box;
+  border: 1px solid #f46a6a;
+  border-radius: 0.25rem; */
+  color: #f46a6a;;
+  position: relative;
 }
