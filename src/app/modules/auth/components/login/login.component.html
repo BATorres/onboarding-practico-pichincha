@@ -1,15 +1,15 @@
 <div class="form-signin">
   <div class="card">
-    <div class="card-body py-5">
-      <form
+    <div *ngIf="errorMessage">{{ errorMessage }}</div>
+    <form
         class="row"
         [formGroup]="form"
         (ngSubmit)="submit()"
         novalidate
         autocomplete="off"
       >
-        <div class="form-group col-12">
-          <label for="email">Correo electrónico</label>
+        <div class="form-group col-12 pb-3">
+          <label for="email">Correo electrónico</label><br><br>
           <input
             type="email"
             class="form-control"
@@ -26,8 +26,8 @@
             </div>
           </div>
         </div>
-        <div class="form-group col-12">
-          <label for="password">Contraseña</label>
+        <div class="form-group col-12 pb-3">
+          <label for="password">Contraseña</label><br><br>
           <input
             type="password"
             class="form-control"
@@ -50,6 +50,5 @@
           </button>
         </div>
       </form>
-    </div>
   </div>
 </div>

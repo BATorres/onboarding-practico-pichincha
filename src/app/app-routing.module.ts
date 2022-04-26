@@ -2,14 +2,20 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FullLayoutComponent } from './layout/full-layout.component';
 import { SimpleLayoutComponent } from './layout/simple-layout.component';
+import { AuthGuard } from './modules/auth/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: '/usuario',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
     component: SimpleLayoutComponent,
     children: [
       {
-        path: 'login',
+        path: '',
         loadChildren: () => import('./modules/auth/auth.module').then((m) => m.AuthModule),
       },
     ],
@@ -17,6 +23,8 @@ const routes: Routes = [
   {
     path: '',
     component: FullLayoutComponent,
+    data: { roles: ['Administrador'] },
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'rol',
@@ -27,11 +35,6 @@ const routes: Routes = [
         loadChildren: () => import('./modules/user/user.module').then((m) => m.UserModule),
       },
     ],
-  },
-  {
-    path: '',
-    redirectTo: 'usuario',
-    pathMatch: 'full',
   },
 ];
 
